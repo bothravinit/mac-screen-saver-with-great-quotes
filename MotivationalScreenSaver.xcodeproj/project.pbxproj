@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		/* Screen Saver target */
 		AA00001C000000000000000A /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000011000000000000000A /* Quote.swift */; };
 		AA00001D000000000000000A /* FallbackQuotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000012000000000000000A /* FallbackQuotes.swift */; };
 		AA00001E000000000000000A /* QuoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000013000000000000000A /* QuoteStore.swift */; };
@@ -15,7 +16,35 @@
 		AA000021000000000000000A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000016000000000000000A /* ContentView.swift */; };
 		AA000022000000000000000A /* ScreenSaverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000017000000000000000A /* ScreenSaverView.swift */; };
 		AA000024000000000000000A /* ScreenSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA00001A000000000000000A /* ScreenSaver.framework */; };
+		/* App target */
+		CC00000F000000000000000A /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000B000000000000000A /* AppMain.swift */; };
+		CC000010000000000000000A /* InstallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000C000000000000000A /* InstallView.swift */; };
+		CC000011000000000000000A /* MotivationalScreenSaver.saver in Embed Screen Savers */ = {isa = PBXBuildFile; fileRef = AA00001B000000000000000A /* MotivationalScreenSaver.saver */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CC000013000000000000000A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA000001000000000000000A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA000007000000000000000A;
+			remoteInfo = MotivationalScreenSaver;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CC000009000000000000000A /* Embed Screen Savers */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Library/Screen Savers";
+			dstSubfolderSpec = 16;
+			files = (
+				CC000011000000000000000A /* MotivationalScreenSaver.saver in Embed Screen Savers */,
+			);
+			name = "Embed Screen Savers";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		AA000011000000000000000A /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
@@ -29,6 +58,11 @@
 		AA000019000000000000000A /* MotivationalScreenSaver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MotivationalScreenSaver.entitlements; sourceTree = "<group>"; };
 		AA00001A000000000000000A /* ScreenSaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScreenSaver.framework; path = System/Library/Frameworks/ScreenSaver.framework; sourceTree = SDKROOT; };
 		AA00001B000000000000000A /* MotivationalScreenSaver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotivationalScreenSaver.saver; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC00000B000000000000000A /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
+		CC00000C000000000000000A /* InstallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallView.swift; sourceTree = "<group>"; };
+		CC00000D000000000000000A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC00000E000000000000000A /* MotivationalScreenSaverApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MotivationalScreenSaverApp.entitlements; sourceTree = "<group>"; };
+		CC000001000000000000000A /* Motivational Screen Saver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Motivational Screen Saver.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,12 +74,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CC000008000000000000000A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		AA000002000000000000000A /* MotivationalScreenSaver */ = {
 			isa = PBXGroup;
 			children = (
+				CC00000A000000000000000A /* App */,
 				AA000004000000000000000A /* Sources */,
 				AA000005000000000000000A /* Resources */,
 				AA000006000000000000000A /* Frameworks */,
@@ -58,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				AA00001B000000000000000A /* MotivationalScreenSaver.saver */,
+				CC000001000000000000000A /* Motivational Screen Saver.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,6 +135,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CC00000A000000000000000A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CC00000B000000000000000A /* AppMain.swift */,
+				CC00000C000000000000000A /* InstallView.swift */,
+				CC00000D000000000000000A /* Info.plist */,
+				CC00000E000000000000000A /* MotivationalScreenSaverApp.entitlements */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -112,6 +166,25 @@
 			productReference = AA00001B000000000000000A /* MotivationalScreenSaver.saver */;
 			productType = "com.apple.product-type.screen-saver";
 		};
+		CC000002000000000000000A /* Motivational Screen Saver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC000003000000000000000A /* Build configuration list for PBXNativeTarget "Motivational Screen Saver" */;
+			buildPhases = (
+				CC000006000000000000000A /* Sources */,
+				CC000008000000000000000A /* Frameworks */,
+				CC000007000000000000000A /* Resources */,
+				CC000009000000000000000A /* Embed Screen Savers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CC000012000000000000000A /* PBXTargetDependency */,
+			);
+			name = "Motivational Screen Saver";
+			productName = "Motivational Screen Saver";
+			productReference = CC000001000000000000000A /* Motivational Screen Saver.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -123,6 +196,9 @@
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					AA000007000000000000000A = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					CC000002000000000000000A = {
 						CreatedOnToolsVersion = 16.0;
 					};
 				};
@@ -141,12 +217,20 @@
 			projectRoot = "";
 			targets = (
 				AA000007000000000000000A /* MotivationalScreenSaver */,
+				CC000002000000000000000A /* Motivational Screen Saver */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		AA000010000000000000000A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC000007000000000000000A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -170,7 +254,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CC000006000000000000000A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC00000F000000000000000A /* AppMain.swift in Sources */,
+				CC000010000000000000000A /* InstallView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CC000012000000000000000A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA000007000000000000000A /* MotivationalScreenSaver */;
+			targetProxy = CC000013000000000000000A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		AA00000A000000000000000A /* Debug */ = {
@@ -311,6 +412,38 @@
 			};
 			name = Release;
 		};
+		CC000004000000000000000A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = App/MotivationalScreenSaverApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = App/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vinitbothra.MotivationalScreenSaverApp";
+				PRODUCT_NAME = "Motivational Screen Saver";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CC000005000000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = App/MotivationalScreenSaverApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = App/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vinitbothra.MotivationalScreenSaverApp";
+				PRODUCT_NAME = "Motivational Screen Saver";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -328,6 +461,15 @@
 			buildConfigurations = (
 				AA00000C000000000000000A /* Debug */,
 				AA00000D000000000000000A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC000003000000000000000A /* Build configuration list for PBXNativeTarget "Motivational Screen Saver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC000004000000000000000A /* Debug */,
+				CC000005000000000000000A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
