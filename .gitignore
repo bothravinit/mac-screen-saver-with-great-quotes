@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode build output
+build/
+release/
+DerivedData/
+*.xcuserdata/
+xcuserdata/
+*.xcworkspace
+*.moved-aside
+
+# Archives and zips (uploaded to GitHub Releases separately)
+*.zip
+*.tar.gz
+
+# Claude session data
+.claude/
