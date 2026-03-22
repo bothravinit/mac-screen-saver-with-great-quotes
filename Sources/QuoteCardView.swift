@@ -19,7 +19,7 @@ struct QuoteCardView: View {
         .padding(.horizontal, 48)
         .padding(.vertical, 36)
         .background(.ultraThinMaterial)
-        .cornerRadius(20)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: .black.opacity(0.3), radius: 20, x: 0, y: 8)
         .frame(maxWidth: .infinity)
         .padding(.horizontal, 80) // keeps card within 80% of screen width

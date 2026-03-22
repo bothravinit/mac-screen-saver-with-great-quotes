@@ -5,20 +5,22 @@ final class ScreenSaverView: ScreenSaver.ScreenSaverView {
     private var hostingView: NSHostingView<ContentView>?
     private let store = QuoteStore()
     private var quoteTimer: Timer?
+    private var loadTask: Task<Void, Never>?
 
     override init?(frame: NSRect, isPreview: Bool) {
         super.init(frame: frame, isPreview: isPreview)
-        setupHostingView(frame: frame)
-        Task { await store.load() }
+        setupHostingView()
+        loadTask = Task { await store.load() }
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupHostingView(frame: bounds)
-        Task { await store.load() }
+        setupHostingView()
+        loadTask = Task { await store.load() }
     }
 
     override func startAnimation() {
+        guard quoteTimer == nil else { return }
         super.startAnimation()
         quoteTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) { [weak self] _ in
             Task { @MainActor in self?.store.advance() }
@@ -30,6 +32,8 @@ final class ScreenSaverView: ScreenSaver.ScreenSaverView {
         super.stopAnimation()
         quoteTimer?.invalidate()
         quoteTimer = nil
+        loadTask?.cancel()
+        loadTask = nil
     }
 
     override func animateOneFrame() {
@@ -38,7 +42,7 @@ final class ScreenSaverView: ScreenSaver.ScreenSaverView {
 
     // MARK: - Private
 
-    private func setupHostingView(frame: NSRect) {
+    private func setupHostingView() {
         let content = ContentView(store: store)
         let hosting = NSHostingView(rootView: content)
         hosting.frame = bounds
