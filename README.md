@@ -12,6 +12,18 @@ A native macOS screen saver that displays motivational quotes on a beautiful ani
 - Fallback set of 10 built-in quotes if the network is unavailable
 - Cache refreshes automatically every 7 days in the background
 
+## Quick Install (no developer tools needed)
+
+1. Download **[MotivationalScreenSaver.zip](https://github.com/bothravinit/mac-screen-saver-with-great-quotes/releases/latest/download/MotivationalScreenSaver.zip)** from the latest release
+2. Unzip to get `MotivationalScreenSaver.saver`
+3. Double-click the `.saver` file — macOS will ask *"Do you want to install this screen saver?"*
+4. Click **Install for this user only**
+5. Open **System Settings** → search **Screen Saver** → select **MotivationalScreenSaver**
+
+> If macOS blocks the file, go to **System Settings → Privacy & Security** and click **Allow Anyway**.
+
+---
+
 ## Requirements
 
 - macOS 12.0 (Monterey) or later
