@@ -20,22 +20,25 @@ final class QuoteStore: ObservableObject {
     private let cacheTTL: TimeInterval = 7 * 24 * 60 * 60  // 7 days
     private let logger = Logger(subsystem: "com.vinitbothra.MotivationalScreenSaver", category: "QuoteStore")
 
-    func load() {
-        if let cache = loadCache(), !isStale(cache) {
+    func load() async {
+        let cachedResult = await loadCacheFromDisk()
+
+        if let cache = cachedResult, !isStale(cache) {
+            // Fresh cache: use it immediately
             setQuotes(cache.quotes)
+        } else if let cache = cachedResult {
+            // Stale cache: use it immediately, refresh in background (takes effect next activation)
+            setQuotes(cache.quotes)
+            Task { await fetchAndCache(applyToSession: false) }
         } else {
-            // Use cache or fallback immediately; refresh in background
-            if let cache = loadCache() {
-                setQuotes(cache.quotes)
-            } else {
-                setQuotes(fallbackQuotes)
-            }
-            Task { await fetchAndCache() }
+            // No cache: show fallback immediately, fetch and apply to current session
+            setQuotes(fallbackQuotes)
+            Task { await fetchAndCache(applyToSession: true) }
         }
     }
 
     func advance() {
-        guard !quotes.isEmpty else { return }
+        guard !quotes.isEmpty, !shuffledIndices.isEmpty else { return }
         currentIndex += 1
         if currentIndex >= shuffledIndices.count {
             reshuffleIndices()
@@ -56,16 +59,19 @@ final class QuoteStore: ObservableObject {
         currentIndex = 0
     }
 
-    private func loadCache() -> QuoteCache? {
-        guard let data = try? Data(contentsOf: cacheURL) else { return nil }
-        return try? JSONDecoder().decode(QuoteCache.self, from: data)
+    private func loadCacheFromDisk() async -> QuoteCache? {
+        let url = cacheURL
+        return await Task.detached {
+            guard let data = try? Data(contentsOf: url) else { return nil }
+            return try? JSONDecoder().decode(QuoteCache.self, from: data)
+        }.value
     }
 
     private func isStale(_ cache: QuoteCache) -> Bool {
         Date().timeIntervalSince(cache.fetchedAt) > cacheTTL
     }
 
-    private func fetchAndCache() async {
+    private func fetchAndCache(applyToSession: Bool) async {
         do {
             let (data, response) = try await URLSession.shared.data(from: apiURL)
             guard let http = response as? HTTPURLResponse, http.statusCode == 200 else {
@@ -78,8 +84,11 @@ final class QuoteStore: ObservableObject {
             let encoded = try JSONEncoder().encode(cache)
             try encoded.write(to: cacheURL, options: .atomic)
             logger.info("Fetched and cached \(fetched.count) quotes.")
+            if applyToSession {
+                setQuotes(fetched)
+            }
         } catch {
-            logger.error("Fetch/cache error: \(error.localizedDescription)")
+            logger.error("Fetch/cache error: \(String(describing: error))")
         }
     }
 }
