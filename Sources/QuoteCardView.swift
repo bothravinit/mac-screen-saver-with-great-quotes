@@ -5,7 +5,7 @@ struct QuoteCardView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            Text(""\(quote.text)"")
+            Text("\u{201C}\(quote.text)\u{201D}")
                 .font(.system(size: 52, weight: .bold, design: .default))
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
